@@ -25,7 +25,7 @@ AppModule = __decorate([
             mongoose_1.MongooseModule.forFeature([{ name: 'Auth', schema: usuario_schema_1.UsuarioSchema }]),
             juego_module_1.JuegoModule,
             usuario_module_1.UsuarioModule,
-            mongoose_1.MongooseModule.forRoot('mongodb://vps-6a3f48fd.vps.ovh.net:27017/playRest_v3'),
+            mongoose_1.MongooseModule.forRoot('mongodb://127.0.0.1:27017/playRest_v3'),
             multer_1.MulterModule.register({
                 dest: './public/uploads',
             }),
