@@ -16,6 +16,11 @@ export class AuthController {
     return res.render('public/iniciarSesion');
   }
 
+  @Get('register')
+  async mostrarRegistro(@Res() res) {
+    return res.render('public/registro');
+  }
+
   @Get('logout')
   async cerrarSession(@Res() res, @Req() req) {
     try {
@@ -47,13 +52,34 @@ export class AuthController {
     }
   }
 
-  //Subida de usuarios a la BBDD
+  //Registro
+  @Post('register')
+  async insertar(@Res() res, @Req() req, @Body() body) {
+    const usuarios = await this.usuarioServices.listar();
+    const usu = body.usuario;
+    const pass = body.password;
 
-  // @Get('subirUsuarios')
-  // async insertar() {
-  //   this.usuarioServices.insertar({
-  //     login: 'Paquito',
-  //     password: 'Paquito1',
-  //   });
-  // }
+    const existe = usuarios.filter(
+      (usuario) =>
+        usuario.login == usu && usuario && usuario.password == pass && usuario,
+    );
+
+    if (existe.length > 0) {
+      res.render('public/registro', {
+        error: 'Error: El usuario ya existe',
+      });
+    } else {
+      this.usuarioServices
+        .insertar({ login: usu, password: pass })
+        .then(() => {
+          req.session.usuario = usu;
+          res.redirect('/');
+        })
+        .catch((e) => {
+          res.render('public/registro', {
+            error: 'Error: ' + e,
+          });
+        });
+    }
+  }
 }

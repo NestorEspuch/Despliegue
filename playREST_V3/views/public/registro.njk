@@ -1,0 +1,20 @@
+{% extends "./base.njk" %}
+{% block titulo %}registrarse{% endblock %}
+{% block contenido %}
+    <h1>Registrate:</h1>
+    <form method="post" action="/auth/register">
+        <div class="form-group mb-3">
+            <label for="usuario">Usuario:
+            </label>
+            <input type="text" class="form-control" name="usuario" id="usuario" placeholder="Introduce tu usuario">
+        </div>
+        <div class="form-group mb-3">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-primary mb-3">Registrarse</button>
+    </form>
+    {% if error %}
+        <div class="alert alert-danger" role="alert">{{ error }} </div>
+    {% endif %}
+{% endblock %}
