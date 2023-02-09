@@ -14,7 +14,7 @@ import { UsuarioModule } from './usuario/usuario.module';
     MongooseModule.forFeature([{ name: 'Auth', schema: UsuarioSchema }]),
     JuegoModule,
     UsuarioModule,
-    MongooseModule.forRoot('mymongodb://my:27017/playRest_v3'),
+    MongooseModule.forRoot('mongodb://mymongodb:27017/playRest_v3'),
     MulterModule.register({
       dest: './public/uploads',
     }),
